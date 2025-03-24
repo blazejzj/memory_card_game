@@ -1,0 +1,16 @@
+// FONTS
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+// OTHERS
+@import "reset";
+@import "base";
+@import "mixins";
+@import "variables";
+@import "./components/_app";
+
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+}

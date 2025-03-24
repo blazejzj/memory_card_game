@@ -1,0 +1,12 @@
+@import "mixins";
+@import "_variables";
+
+html,
+body {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    background-color: $main-bg-color;
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: 0.15px;
+    scroll-behavior: smooth;
+}

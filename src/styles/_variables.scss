@@ -1,0 +1,40 @@
+// FONT IMPORTS
+
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+// COLORS
+$main-bg-color: #f3f4f6;
+$card-bg-color: #fff;
+$preview-bg-color: #ffffff;
+
+$primary-color: #2e597c;
+$secondary-color: #929696;
+
+// WIDTHS
+$page-max-width: 1800px;
+$cv-preview-height: 29.7cm;
+$cv-preview-width: 21cm;
+
+$expanding-section-max-width: 380px;
+$expanding-section-max-height: 100px;
+
+// FONTS
+$font-size-xxs-responsive: min(calc(0.1rem + 1vw), 0.65rem);
+$font-size-xs-responsive: min(calc(0.15rem + 1vw), 0.75rem);
+$font-size-small-responsive: min(calc(0.2rem + 1.1vw), 0.8rem);
+$font-size-medium-low-responsive: min(calc(0.2rem + 1.25vw), 0.85rem);
+$font-size-medium-lower-responsive: min(calc(0.23rem + 1.11vw), 0.85rem);
+$font-size-medium-responsive: min(calc(0.25rem + 1vw), 1rem);
+$font-size-normal-responsive: min(calc(0.5rem + 1vw), 1rem);
+$font-size-large-responsive: min(calc(0.5rem + 1vw), 1.25rem);
+$font-size-normal-large-responsive: min(calc(0.5rem + 1vw), 1.125rem);
+$font-size-xl-responsive: min(calc(0.75rem + 1vw), 1.5rem);
+$font-size-xxl-responsive: min(calc(1rem + 1vw), 2rem);
+$font-size-xxl-responsive: min(calc(1.1rem + 1vw), 2.25rem);
+$font-size-xxxl-responsive: min(calc(1.2rem + 1.1vw), 2.5rem);
+
+// FONT TYPES
+$font-CV-preview: "EB Garamond", serif;
+$font-CV-preview-second: "Poppins", sans-serif;
+$font-CV-option-1: "poppins";
