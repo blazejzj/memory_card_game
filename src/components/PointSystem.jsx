@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PointSystem(props) {
     return (
-        <div>
+        <div className="pointsystem-container">
             <p>
                 {props.points} / {props.requiredPoints}
             </p>

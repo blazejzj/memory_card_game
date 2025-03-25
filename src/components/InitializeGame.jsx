@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Victory from "./Victory";
 import Loss from "./Loss";
 import pokemonBackside from "./../assets/pokemonBackside.webp";
+import clickSound from "./../assets/clickCard.mp3";
 
 export default function InitializeGame(props) {
     const [pokemons, setPokemons] = useState([]);
@@ -10,6 +11,11 @@ export default function InitializeGame(props) {
     const [usedIds, setUsedIds] = useState([]);
 
     const api = "https://pokeapi.co/api/v2/pokemon/";
+
+    const playClickSound = () => {
+        const audio = new Audio(clickSound);
+        audio.play().catch((e) => console.log("Sound blocked...", e));
+    };
 
     async function getPokemon(id) {
         try {
@@ -24,22 +30,20 @@ export default function InitializeGame(props) {
         }
     }
 
-    function getRandomId() {
-        const randomId = Math.floor(Math.random() * 500);
-        if (usedIds.includes(randomId)) return getRandomId();
-
-        setUsedIds([...usedIds, randomId]);
-        return randomId;
-    }
-
     useEffect(() => {
         const newPokemonsArray = [];
+        const localUsedIds = [];
+
         const fetchPokemons = async () => {
             for (let i = 0; i < props.difficulty; i++) {
-                const id = getRandomId();
+                let randomId;
+                do {
+                    randomId = Math.floor(Math.random() * 500);
+                } while (localUsedIds.includes(randomId));
 
-                const pokemon = await getPokemon(id);
+                localUsedIds.push(randomId);
 
+                const pokemon = await getPokemon(randomId);
                 newPokemonsArray.push({
                     sprite: pokemon.sprites.front_default,
                     name: pokemon.name,
@@ -47,40 +51,47 @@ export default function InitializeGame(props) {
                     isRevealed: false,
                 });
             }
+            setUsedIds(localUsedIds);
             setPokemons(newPokemonsArray);
-            const timer = setTimeout(() => {
+            setTimeout(() => {
                 setPokemons((prev) =>
                     prev.map((pokemon) => ({ ...pokemon, isRevealed: true }))
                 );
             }, 1000);
-
-            return () => clearTimeout(timer);
         };
         fetchPokemons();
     }, [props.difficulty]);
 
     function renderCards() {
-        return pokemons.map((pokemon) => (
-            <button
-                key={pokemon.name}
-                className="pokemon-card"
-                onClick={() => handleCardClick(pokemon.name)}
-            >
-                <div
-                    className={`card-inner ${
-                        !pokemon.isRevealed ? "flipped" : ""
-                    }`}
-                >
-                    <div className="card-front">
-                        <img src={pokemon.sprite} alt={pokemon.name} />
-                        <p>{pokemon.name}</p>
-                    </div>
-                    <div className="card-back">
-                        <img src={pokemonBackside} alt="Backside" />
-                    </div>
-                </div>
-            </button>
-        ));
+        if (pokemons.length === 0) {
+            return <div className="loading-indicator">Loading cards...</div>;
+        }
+
+        return (
+            <div className="cards-container">
+                {pokemons.map((pokemon) => (
+                    <button
+                        key={pokemon.name}
+                        className="pokemon-card"
+                        onClick={() => handleCardClick(pokemon.name)}
+                    >
+                        <div
+                            className={`card-inner ${
+                                !pokemon.isRevealed ? "flipped" : ""
+                            }`}
+                        >
+                            <div className="card-front">
+                                <img src={pokemon.sprite} alt={pokemon.name} />
+                                <p>{pokemon.name}</p>
+                            </div>
+                            <div className="card-back">
+                                <img src={pokemonBackside} alt="Backside" />
+                            </div>
+                        </div>
+                    </button>
+                ))}
+            </div>
+        );
     }
 
     function shuffleCards() {
@@ -93,8 +104,11 @@ export default function InitializeGame(props) {
     }
 
     function handleCardClick(name) {
+        playClickSound();
+
         if (clickedPokemons.includes(name)) {
             setGameState("loss");
+            return;
         } else {
             setClickedPokemons([...clickedPokemons, name]);
             props.setPoints(props.points + 1);
@@ -102,17 +116,18 @@ export default function InitializeGame(props) {
                 setGameState("win");
             }
         }
-        setPokemons((prev) =>
-            prev.map((pokemon) => ({ ...pokemon, isRevealed: false }))
+        setPokemons((prevPokemons) =>
+            prevPokemons.map((p) => ({ ...p, isRevealed: false }))
         );
+
         setTimeout(() => {
             shuffleCards();
             setTimeout(() => {
-                setPokemons((prev) =>
-                    prev.map((pokemon) => ({ ...pokemon, isRevealed: true }))
+                setPokemons((prevPokemons) =>
+                    prevPokemons.map((p) => ({ ...p, isRevealed: true }))
                 );
-            }, 100);
-        }, 1000);
+            }, 800);
+        }, 800);
     }
 
     if (gameState === "") return renderCards();
@@ -132,6 +147,7 @@ export default function InitializeGame(props) {
                 setGameActive={props.setGameActive}
                 setGameState={setGameState}
                 setPoints={props.setPoints}
+                setClickedPokemons={setClickedPokemons}
             />
         );
     }

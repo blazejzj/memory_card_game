@@ -1,0 +1,21 @@
+.credit {
+    background: rgba(0, 0, 0, 0.25);
+    height: 4rem;
+    width: 75%;
+    place-self: center;
+    border-radius: 25px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > {
+        display: flex;
+        a {
+            display: flex;
+            font-size: 2rem;
+            gap: 1rem;
+            color: black;
+            text-decoration: none;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+    }
+}

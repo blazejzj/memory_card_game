@@ -1,0 +1,12 @@
+.pointsystem-container {
+    background: rgba(0, 0, 0, 0.25);
+    width: 8rem;
+    height: 3rem;
+    border-radius: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p {
+        font-size: 2rem;
+    }
+}

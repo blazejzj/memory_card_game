@@ -1,0 +1,38 @@
+.retry-container {
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 300px;
+    place-self: center;
+    border-radius: 25%;
+    gap: 1rem;
+    h1 {
+        font-size: 2rem;
+    }
+    p {
+        font-size: 1.6rem;
+    }
+    .retry-buttons {
+        margin-top: 2rem;
+        display: flex;
+        gap: 1rem;
+        button {
+            background: none;
+            border: none;
+            outline: none;
+            font-size: 2rem;
+            font-family: "Tiny5", sans-serif;
+            animation-duration: 1s;
+            animation-fill-mode: both;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+        button:hover {
+            cursor: pointer;
+            animation-name: bounce;
+        }
+    }
+}

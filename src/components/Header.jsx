@@ -16,7 +16,7 @@ export default function Header() {
                         size="1x"
                         className="githubIcon"
                     />
-                    Blazej
+                    blazejzj
                 </a>
             </div>
         );

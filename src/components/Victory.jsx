@@ -6,18 +6,18 @@ export default function Victory(props) {
             props.setGameActive(true);
             props.setGameState("");
             props.setPoints(0);
+            props.setClickedPokemons([]);
         } else if (e.currentTarget.value === "no") {
             props.setGameActive(false);
             props.setGameState("");
             props.setPoints(0);
+            props.setClickedPokemons([]);
         }
     }
     return (
         <div className="retry-container">
             <h1>Congratulations! You won!</h1>
-            <p>
-                Play again? <b>(With the same cards)</b>
-            </p>
+            <p>Play again? (With the same cards)</p>
             <div className="retry-buttons">
                 <button onClick={handleRetry} value="yes">
                     YES
